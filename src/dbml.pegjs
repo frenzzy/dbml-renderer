@@ -26,6 +26,7 @@ TableItems = (head:TableItem tail:(EOL __ item:TableItem { return item; })* { re
 TableItem =
   Column
   / Indices
+  / Checks
   / option:Option { return { type: "option", option }; }
 TableSettings = Settings
 
@@ -45,6 +46,10 @@ Index = columns:(name:Function { return [name] } / (name:ColumnName { return [na
 
 CompositeIndex = "(" _ entries:(head:CompositeIndexEntry tail:(_ "," _ entry:CompositeIndexEntry { return entry; })* { return [head, ...tail]; } )? _ ")" { return entries; }
 CompositeIndexEntry = ColumnName / Function
+
+Checks = "Checks"i __ "{" __ checks:ChecksList __ "}" { return { type: "checks", checks }; }
+ChecksList = (head:CheckItem tail:(EOL __ check:CheckItem { return check; })* { return [head, ...tail]; })?
+CheckItem = expression:Function _ settings:Settings? { return { expression, settings } }
 
 TableGroup = "TableGroup"i _ name:Name _ settings:TableGroupSettings? __ "{" __ items:TableGroupItems __ "}"
   { return { type: "group", name, items, settings }; }

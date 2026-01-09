@@ -8,6 +8,7 @@ import {
   Project,
   Ref,
   Table,
+  TableChecks,
   TableGroup,
   TableIndices,
 } from "./types";
@@ -17,6 +18,7 @@ export const check = (input: Output): NormalizedOutput => {
     actual: table,
     columns: extract("column", table.items),
     indices: extract("indices", table.items)[0],
+    checks: extract("checks", table.items)[0],
     options: extract("option", table.items).reduce(
       (acc, i) => ({ ...acc, ...i.option }),
       {},
@@ -84,6 +86,7 @@ export type NormalizedTable = {
   actual: Table;
   columns: Column[];
   indices?: TableIndices;
+  checks?: TableChecks;
   options: Record<string, string>;
 };
 

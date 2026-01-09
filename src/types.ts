@@ -51,12 +51,25 @@ export const TableIndices = z.object({
 });
 export type TableIndices = z.infer<typeof TableIndices>;
 
+export const TableChecks = z.object({
+  type: z.literal("checks"),
+  checks: z.array(
+    z.object({
+      expression: z.string(),
+      settings: Settings.nullable().transform((v) => v || {}),
+    }),
+  ),
+});
+export type TableChecks = z.infer<typeof TableChecks>;
+
 export const Table = z.object({
   type: z.literal("table"),
   schema: z.string().nullable(),
   name: z.string(),
   alias: z.string().nullable(),
-  items: z.array(z.union([Comment, Column, TableOption, TableIndices])),
+  items: z.array(
+    z.union([Comment, Column, TableOption, TableIndices, TableChecks]),
+  ),
   settings: Settings.nullable().transform((v) => v || {}),
 });
 export type Table = z.infer<typeof Table>;

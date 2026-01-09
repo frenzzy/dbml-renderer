@@ -1,9 +1,10 @@
-import { Column, Enum, Output, Project, Ref, Table, TableGroup, TableIndices } from "./types";
+import { Column, Enum, Output, Project, Ref, Table, TableChecks, TableGroup, TableIndices } from "./types";
 export declare const check: (input: Output) => NormalizedOutput;
 export type NormalizedTable = {
     actual: Table;
     columns: Column[];
     indices?: TableIndices;
+    checks?: TableChecks;
     options: Record<string, string>;
 };
 export type NormalizedGroup = {

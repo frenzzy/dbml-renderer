@@ -96,6 +96,32 @@ export declare const TableIndices: z.ZodObject<{
     }[];
 }>;
 export type TableIndices = z.infer<typeof TableIndices>;
+export declare const TableChecks: z.ZodObject<{
+    type: z.ZodLiteral<"checks">;
+    checks: z.ZodArray<z.ZodObject<{
+        expression: z.ZodString;
+        settings: z.ZodEffects<z.ZodNullable<z.ZodRecord<z.ZodString, z.ZodNullable<z.ZodString>>>, Record<string, string | null>, Record<string, string | null> | null>;
+    }, "strip", z.ZodTypeAny, {
+        settings: Record<string, string | null>;
+        expression: string;
+    }, {
+        settings: Record<string, string | null> | null;
+        expression: string;
+    }>, "many">;
+}, "strip", z.ZodTypeAny, {
+    type: "checks";
+    checks: {
+        settings: Record<string, string | null>;
+        expression: string;
+    }[];
+}, {
+    type: "checks";
+    checks: {
+        settings: Record<string, string | null> | null;
+        expression: string;
+    }[];
+}>;
+export type TableChecks = z.infer<typeof TableChecks>;
 export declare const Table: z.ZodObject<{
     type: z.ZodLiteral<"table">;
     schema: z.ZodNullable<z.ZodString>;
@@ -158,6 +184,30 @@ export declare const Table: z.ZodObject<{
             settings: Record<string, string | null> | null;
             columns: string[];
         }[];
+    }>, z.ZodObject<{
+        type: z.ZodLiteral<"checks">;
+        checks: z.ZodArray<z.ZodObject<{
+            expression: z.ZodString;
+            settings: z.ZodEffects<z.ZodNullable<z.ZodRecord<z.ZodString, z.ZodNullable<z.ZodString>>>, Record<string, string | null>, Record<string, string | null> | null>;
+        }, "strip", z.ZodTypeAny, {
+            settings: Record<string, string | null>;
+            expression: string;
+        }, {
+            settings: Record<string, string | null> | null;
+            expression: string;
+        }>, "many">;
+    }, "strip", z.ZodTypeAny, {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null>;
+            expression: string;
+        }[];
+    }, {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null> | null;
+            expression: string;
+        }[];
     }>]>, "many">;
     settings: z.ZodEffects<z.ZodNullable<z.ZodRecord<z.ZodString, z.ZodNullable<z.ZodString>>>, Record<string, string | null>, Record<string, string | null> | null>;
 }, "strip", z.ZodTypeAny, {
@@ -183,6 +233,12 @@ export declare const Table: z.ZodObject<{
             settings: Record<string, string | null>;
             columns: string[];
         }[];
+    } | {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null>;
+            expression: string;
+        }[];
     })[];
 }, {
     type: "table";
@@ -206,6 +262,12 @@ export declare const Table: z.ZodObject<{
         indices: {
             settings: Record<string, string | null> | null;
             columns: string[];
+        }[];
+    } | {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null> | null;
+            expression: string;
         }[];
     })[];
 }>;
@@ -539,6 +601,30 @@ export declare const Entity: z.ZodUnion<[z.ZodObject<{
             settings: Record<string, string | null> | null;
             columns: string[];
         }[];
+    }>, z.ZodObject<{
+        type: z.ZodLiteral<"checks">;
+        checks: z.ZodArray<z.ZodObject<{
+            expression: z.ZodString;
+            settings: z.ZodEffects<z.ZodNullable<z.ZodRecord<z.ZodString, z.ZodNullable<z.ZodString>>>, Record<string, string | null>, Record<string, string | null> | null>;
+        }, "strip", z.ZodTypeAny, {
+            settings: Record<string, string | null>;
+            expression: string;
+        }, {
+            settings: Record<string, string | null> | null;
+            expression: string;
+        }>, "many">;
+    }, "strip", z.ZodTypeAny, {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null>;
+            expression: string;
+        }[];
+    }, {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null> | null;
+            expression: string;
+        }[];
     }>]>, "many">;
     settings: z.ZodEffects<z.ZodNullable<z.ZodRecord<z.ZodString, z.ZodNullable<z.ZodString>>>, Record<string, string | null>, Record<string, string | null> | null>;
 }, "strip", z.ZodTypeAny, {
@@ -564,6 +650,12 @@ export declare const Entity: z.ZodUnion<[z.ZodObject<{
             settings: Record<string, string | null>;
             columns: string[];
         }[];
+    } | {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null>;
+            expression: string;
+        }[];
     })[];
 }, {
     type: "table";
@@ -587,6 +679,12 @@ export declare const Entity: z.ZodUnion<[z.ZodObject<{
         indices: {
             settings: Record<string, string | null> | null;
             columns: string[];
+        }[];
+    } | {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null> | null;
+            expression: string;
         }[];
     })[];
 }>, z.ZodObject<{
@@ -859,6 +957,30 @@ export declare const Output: z.ZodArray<z.ZodUnion<[z.ZodObject<{
             settings: Record<string, string | null> | null;
             columns: string[];
         }[];
+    }>, z.ZodObject<{
+        type: z.ZodLiteral<"checks">;
+        checks: z.ZodArray<z.ZodObject<{
+            expression: z.ZodString;
+            settings: z.ZodEffects<z.ZodNullable<z.ZodRecord<z.ZodString, z.ZodNullable<z.ZodString>>>, Record<string, string | null>, Record<string, string | null> | null>;
+        }, "strip", z.ZodTypeAny, {
+            settings: Record<string, string | null>;
+            expression: string;
+        }, {
+            settings: Record<string, string | null> | null;
+            expression: string;
+        }>, "many">;
+    }, "strip", z.ZodTypeAny, {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null>;
+            expression: string;
+        }[];
+    }, {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null> | null;
+            expression: string;
+        }[];
     }>]>, "many">;
     settings: z.ZodEffects<z.ZodNullable<z.ZodRecord<z.ZodString, z.ZodNullable<z.ZodString>>>, Record<string, string | null>, Record<string, string | null> | null>;
 }, "strip", z.ZodTypeAny, {
@@ -884,6 +1006,12 @@ export declare const Output: z.ZodArray<z.ZodUnion<[z.ZodObject<{
             settings: Record<string, string | null>;
             columns: string[];
         }[];
+    } | {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null>;
+            expression: string;
+        }[];
     })[];
 }, {
     type: "table";
@@ -907,6 +1035,12 @@ export declare const Output: z.ZodArray<z.ZodUnion<[z.ZodObject<{
         indices: {
             settings: Record<string, string | null> | null;
             columns: string[];
+        }[];
+    } | {
+        type: "checks";
+        checks: {
+            settings: Record<string, string | null> | null;
+            expression: string;
         }[];
     })[];
 }>, z.ZodObject<{
