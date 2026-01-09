@@ -1,0 +1,80 @@
+// Test file for Checks block functionality
+// Checks are parsed but not rendered visually (by design)
+
+Table products {
+    id integer [primary key]
+    name varchar [not null]
+    price decimal [not null]
+    quantity integer [default: 0]
+    discount_percent integer
+    status varchar
+
+    // Simple check constraints
+    Checks {
+        `price > 0`
+        `quantity >= 0`
+    }
+}
+
+Table orders {
+    id integer [primary key]
+    customer_id integer [not null]
+    total_amount decimal [not null]
+    tax_amount decimal
+    shipping_cost decimal
+    order_date timestamp [default: `now()`]
+    status varchar [not null]
+
+    // Named checks with settings
+    Checks {
+        `total_amount >= 0` [name: 'positive_total']
+        `tax_amount >= 0` [name: 'non_negative_tax']
+        `shipping_cost >= 0` [name: 'valid_shipping']
+    }
+}
+
+Table employees {
+    id integer [primary key]
+    first_name varchar [not null]
+    last_name varchar [not null]
+    email varchar [unique]
+    salary decimal
+    hire_date date [not null]
+    termination_date date
+    department varchar
+    age integer
+
+    // Complex expressions with AND/OR logic
+    Checks {
+        `salary > 0 AND salary < 10000000`
+        `age >= 18 AND age <= 120`
+        `termination_date IS NULL OR termination_date >= hire_date`
+        `email LIKE '%@%.%' OR email IS NULL`
+    }
+}
+
+Table inventory {
+    id integer [primary key]
+    product_id integer [not null]
+    warehouse_id integer [not null]
+    quantity_on_hand integer [not null]
+    quantity_reserved integer [default: 0]
+    reorder_point integer
+    max_stock_level integer
+
+    // Multiple checks with mixed settings
+    Checks {
+        `quantity_on_hand >= 0` [name: 'valid_qty']
+        `quantity_reserved >= 0 AND quantity_reserved <= quantity_on_hand`
+        `reorder_point >= 0` [name: 'valid_reorder']
+        `max_stock_level >= reorder_point OR max_stock_level IS NULL`
+    }
+
+    indexes {
+        (product_id, warehouse_id) [unique]
+    }
+}
+
+// Relationships between tables
+Ref: orders.customer_id > products.id
+Ref: inventory.product_id > products.id
